@@ -141,6 +141,10 @@ Visualizing queue implementations:
 Do we need `empty?` (or `isEmpty` or `isempty`) when implementing either ADT in
 a language that has a "nothing" type  (`nil` in Ruby, `undefined` in JavaScript,
 or `None` in Python)?  Why or why not?
+- We need `empty?` to show that there's actually nothing in there
+- Like, what if you push `undefined`? It'll return `undefined` regardless
+- We could have a bunch of things on the stack, and some of those things can be
+  `nothing` types!
 
 How should we handle the limitations of concrete implementations of either ADT?
 
