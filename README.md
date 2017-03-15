@@ -32,29 +32,75 @@ An [ADT](https://en.wikipedia.org/wiki/Abstract_data_type) is a type defined by
 what it does, rather than how it is implemented.  Specific implementations have
 limitations not found in the ADT and must be able to create instances of the
 type.
+-  They're *purely* theoretical LOL
 
 ## Stack
 
-A stack implements a last in, first out data store (LIFO).  
+A stack implements a last in, first out data store (LIFO).
+-  Last in, first out... literally it's what it sounds like
+-  Plate example-- the last plate on the stack is the first one taken out usually
 
 ### Discussion: Stack
 
 Stack operations:
 
 -   `empty?` - check to see if there are any items on a stack.
+    - Is there a stack? Lol
 -   `push` - add an item onto the top of a stack.
 -   `pop` - remove and return an item from the top of a stack.
+    - If the stack is empty and you try to pop, it gets weird lol you'll
+      probably get a `nothing` type like `null` or `nil`
+-   Any stack that is implemented has these methods!
+-   A stack strace just shows you what's on the stack
+-   If you're using a function that calls itself (recursive function), any time
+    you call it, the information gets saved in a stack
+    And then it gets called until you run out of space
+    - example:
+    ```node
+    const recurse = function recurse() { recurse();};
+    /*if called, returns RangeError: Maximum call stack size exceeded*/
+    ```
+    - This is a call stack! lol
+    - But infinite looping doesn't create a new call stack...
+      - it's the repeated calls, specifically
+      - you can call something once and have it loop lol
 
 Visualizing stack implementations:
 
 -   As an [array](http://www.cs.usfca.edu/~galles/visualization/StackArray.html).
 -   As a [list](http://www.cs.usfca.edu/~galles/visualization/StackLL.html).
+    - A linked list's theoretical limit is the memory on your computer
+    - Will arrays always be fixed?
+        - On your machine, the memory is just an array
+        - JavaScript and Ruby manage that for you so you don't have to worry
+          about making the array bigger
 
 ### Demonstration: Implementing a stack in JavaScript
+
+- check out [defineProperty](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty)
+- also look at notes in [./lib/stack.js](https://github.com/laurpaik/cs/blob/training/lib/stack.js)
+- on the object created by new, Antony created an object, `_store`, which is an array that's hidden
+```node
+> stack._store = [0,1,2]
+[ 0, 1, 2 ]
+> stack._store
+[]
+/*We didn't actually reassign _store because it's JUST a getter*/
+```
+- He also created a method `isEmpty`, that returns true if the stack is empty
+- More methods --push and pop
+- `_store` is just data, whereas `isEmpty` has some functionality
+  - `isEmpty` actually runs code
+  - it's just a getter, but it's still running code
+  - Kind of like 0Squad cart!
+  - You can't hide things completely in these interpreted languages... there's always some sort of loophole
+  - `defineProperty` is kind of like devs saying 'plz do not mess with this'
 
 ### Code along: Annotating a stack implementation in JavaScript
 
 ### Lab: Implementing a stack in Ruby
+
+- look at [./lib/stack.rb](https://github.com/laurpaik/cs/blob/training/lib/stack.rb)
 
 ## Queue
 
@@ -66,7 +112,13 @@ Queue operations:
 
 -   `empty?` - check to see if there are any items in a queue.
 -   `enqueue` - add an item to the tail of a queue.
+    - even if you dequeue
+    - it'll wrap around once it gets to the end, I think
+    - it'll finish the end of the array and then if there are empty slots it'll default to those empty slots
+    - Once it's full, head and tail will prevent you from adding more
 -   `dequeue` - remove an item from the head of a queue.
+    - Takes something off the first end!!! First in, first out
+    - Yooo if you dequeue, the index number of the new head does not change back to 0
 
 Visualizing queue implementations:
 
@@ -75,7 +127,12 @@ Visualizing queue implementations:
 
 ### Demonstration: Implementing a queue in Ruby
 
+- Don't name your class Queue omg Ruby already has one called Queue
+- If we use the same name, Ruby will get confused LOL
+
 ### Code along: Annotating a queue implementation in Ruby
+
+- look at [./lib/queue.rb](https://github.com/laurpaik/cs/blob/training/lib/queue.rb)
 
 ### Lab: Implementing a queue in JavaScript
 
